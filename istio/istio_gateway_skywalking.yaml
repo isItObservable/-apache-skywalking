@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: skywalking-gateway
+  namespace: skywalking
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "skywalking.IP_TO_REPLACE.nip.io"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: skywalking-httproute
+  namespace: hskywalking
+spec:
+  hosts:
+    - "skywalking.IP_TO_REPLACE.nip.io"
+  gateways:
+    - skywalking-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            port:
+              number: 80
+            host: skywalking-skywalking-helm-ui

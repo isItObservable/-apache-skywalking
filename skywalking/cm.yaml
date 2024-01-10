@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+    meta.helm.sh/release-name: skywalking
+    meta.helm.sh/release-namespace: skywalking
+  labels:
+    app: skywalking
+    app.kubernetes.io/managed-by: Helm
+    component: oap
+    release: skywalking
+  name: skywalking-dynamic-config
+  namespace: skywalking
+data:
+  receiver-otel.default.enabledHandlers: "otlp-metrics,otlp-logs,olp-traces"
+  receiver-otel.default.enabledOtelMetricsRules: "istio-controlplane"
+  receiver-zipkin.default.searchableTracesTags: "http.method"
+  receiver-zipkin.default.sampleRate: "10000"
+  receiver-zipkin.default.enableHttpCollector: "true"
+  receiver-zipkin.default.restHost: "0.0.0.0"
+  receiver-zipkin.default.restPort: "9411"
+  envoy-metric.default.acceptMetricsService: "true"
+  envoy-metric.default.alsHTTPAnalysis: "k8s-mesh, mx-mesh"
+  envoy-metric.default.alsTCPAnalysis: "k8s-mesh, mx-mesh"
+  envoy-metric.default.k8sServiceNameRule: "${service.metadata.name}"
+  envoy-metric.default.istioServiceNameRule: "${serviceEntry.metadata.name}"
