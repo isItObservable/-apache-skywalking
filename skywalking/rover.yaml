@@ -4,6 +4,15 @@ metadata:
   name: skywalking-rover
   namespace: skywalking
 ---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: skywalking-rover
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "nodes", "services"]
+    verbs: ["get", "watch", "list"]
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -17,6 +26,11 @@ subjects:
     name: skywalking-rover
     namespace: skywalking
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: skywalking-rover
+---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -25,11 +39,6 @@ rules:
   - apiGroups: [""]
     resources: ["pods", "nodes", "services"]
     verbs: ["get", "watch", "list"]
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: skywalking-rover
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -42,18 +51,8 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: skywalking-rover
-    namespace: default
+    namespace: skywalking
 ---
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: skywalking-rover
-rules:
-  - apiGroups: [""]
-    resources: ["pods", "nodes", "services"]
-    verbs: ["get", "watch", "list"]
----
-
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
