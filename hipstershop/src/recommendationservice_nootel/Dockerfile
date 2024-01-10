@@ -28,7 +28,7 @@ RUN GRPC_HEALTH_PROBE_VERSION=v0.3.6 && \
 WORKDIR /recommendationservice
 COPY requirements.txt requirements.txt
 RUN pip install --upgrade pip
-RUN pip install "apache-skywalking[all]"
+
 RUN pip install -r requirements.txt
 # add files into working directory
 COPY . .
@@ -37,4 +37,4 @@ COPY . .
 ENV PORT "8080"
 EXPOSE 8080
 
-CMD ["run","python3", "/recommendationservice/recommendation_server.py"]
+CMD ["run","python", "/recommendationservice/recommendation_server.py"]

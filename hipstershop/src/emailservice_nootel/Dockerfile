@@ -23,7 +23,7 @@ RUN apt-get -qq update \
 
 # get packages
 COPY requirements.txt .
-RUN pip install "apache-skywalking[all]"
+
 RUN pip install -r requirements.txt
 
 FROM base as final
@@ -50,4 +50,4 @@ COPY --from=builder /usr/local/lib/python3.7/ /usr/local/lib/python3.7/
 COPY . .
 
 EXPOSE 8080
-CMD [ "run", "python3", "email_server.py" ]
+CMD [ "run", "python", "email_server.py" ]
