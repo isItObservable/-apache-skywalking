@@ -76,8 +76,8 @@ helm install "${SKYWALKING_RELEASE_NAME}" oci://registry-1.docker.io/apache/skyw
   --set elasticsearch.enabled=true \
   --set oap.dynamicConfig.enabled=true \
   --set oap.envoy.als.enabled=true \
-  --set oap.env.SW_ENVOY_METRIC_ALS_HTTP_ANALYSIS=mx-mesh \
-  --set oap.env.SW_ENVOY_METRIC_ALS_TCP_ANALYSIS=mx-mesh \
+  --set oap.env.SW_ENVOY_METRIC_ALS_HTTP_ANALYSIS=mx-mesh,k8s-mesh,persistence \
+  --set oap.env.SW_ENVOY_METRIC_ALS_TCP_ANALYSIS=mx-mesh,k8s-mesh,persistence \
   --set oap.env.SW_QUERY_ZIPKIN=default \
   --set oap.env.SW_AGENT_ANALYZER=default \
   --set oap.env.SW_METER_ANALYZER_ACTIVE_FILES=network-profiling
