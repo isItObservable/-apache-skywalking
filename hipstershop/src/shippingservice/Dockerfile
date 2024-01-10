@@ -22,7 +22,8 @@ RUN go mod download
 
 # Skaffold passes in debug-oriented compiler flags
 ARG SKAFFOLD_GO_GCFLAGS
-RUN go build -toolexec=skywalking-go-agent -gcflags="${SKAFFOLD_GO_GCFLAGS}"  -o shippingservice
+RUN skywalking-go-agent -inject /src
+RUN go build -toolexec=skywalking-go-agent -a -gcflags="${SKAFFOLD_GO_GCFLAGS}"  -o shippingservice
 RUN "ls"
 FROM ubuntu
 WORKDIR /src

@@ -5,7 +5,8 @@ WORKDIR /src
 COPY . .
 RUN go mod tidy
 RUN go mod download
-RUN go build  -toolexec=skywalking-go-agent   -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o frontend
+RUN skywalking-go-agent -inject /src
+RUN go build  -toolexec=skywalking-go-agent  -a  -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o frontend
 
 FROM ubuntu as release
 

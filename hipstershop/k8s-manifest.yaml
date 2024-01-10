@@ -129,7 +129,7 @@ spec:
       containers:
         - name: server
           imagePullPolicy: Always
-          image: hrexed/checkoutservice:skywalking-0.4
+          image: hrexed/checkoutservice:skywalking-0.5
           ports:
             - containerPort: 5050
           readinessProbe:
@@ -158,6 +158,8 @@ spec:
             - name: SW_AGENT_INSTANCE
               value: checkoutservice
             - name: SW_AGENT_COLLECTOR_BACKEND_SERVICES
+              value: skywalking-skywalking-helm-oap.skywalking:11800
+            - name: SW_AGENT_REPORTER_GRPC_BACKEND_SERVICE
               value: skywalking-skywalking-helm-oap.skywalking:11800
           # - name: DISABLE_STATS
           #   value: "1"
@@ -335,7 +337,7 @@ spec:
           imagePullPolicy: Always
           # both look good
           #image: registry.lab.dynatrace.org/cloudplatform/hipster-shop-frontend
-          image: hrexed/frontendservice:skywalking-0.4
+          image: hrexed/frontendservice:skywalking-0.5
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -360,6 +362,8 @@ spec:
             - name: SW_AGENT_INSTANCE
               value: frontend
             - name: SW_AGENT_COLLECTOR_BACKEND_SERVICES
+              value: skywalking-skywalking-helm-oap.skywalking:11800
+            - name: SW_AGENT_REPORTER_GRPC_BACKEND_SERVICE
               value: skywalking-skywalking-helm-oap.skywalking:11800
             - name: PORT
               value: "8080"
@@ -581,7 +585,7 @@ spec:
       containers:
         - name: server
           # image: registry.lab.dynatrace.org/cloudplatform/hipster-shop-productcatalogservice
-          image:  hrexed/productcatalgservice:skywalking-0.4
+          image:  hrexed/productcatalgservice:skywalking-0.5
           ports:
             - containerPort: 3550
           env:
@@ -594,6 +598,8 @@ spec:
             - name: SW_AGENT_INSTANCE
               value: productcatalog
             - name: SW_AGENT_COLLECTOR_BACKEND_SERVICES
+              value: skywalking-skywalking-helm-oap.skywalking:11800
+            - name: SW_AGENT_REPORTER_GRPC_BACKEND_SERVICE
               value: skywalking-skywalking-helm-oap.skywalking:11800
           # - name: DISABLE_STATS
           #   value: "1"
@@ -842,7 +848,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: hrexed/shippingservice:skywalking-0.17
+          image: hrexed/shippingservice:skywalking-0.18
           ports:
             - containerPort: 50051
           env:
@@ -853,6 +859,8 @@ spec:
             - name: SW_AGENT_INSTANCE
               value: shipping
             - name: SW_AGENT_COLLECTOR_BACKEND_SERVICES
+              value: skywalking-skywalking-helm-oap.skywalking:11800
+            - name: SW_AGENT_REPORTER_GRPC_BACKEND_SERVICE
               value: skywalking-skywalking-helm-oap.skywalking:11800
           # - name: DISABLE_STATS
           #   value: "1"
@@ -1049,6 +1057,7 @@ spec:
               value: adservice
             - name: SW_AGENT_COLLECTOR_BACKEND_SERVICES
               value: skywalking-skywalking-helm-oap.skywalking:11800
+
           resources:
             requests:
               cpu: 100m

@@ -22,7 +22,8 @@ COPY . .
 RUN go mod tidy
 RUN go mod download
 ARG SKAFFOLD_GO_GCFLAGS
-RUN go build -toolexec=skywalking-go-agent  -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o checkoutservice
+RUN skywalking-go-agent -inject /src
+RUN go build -toolexec=skywalking-go-agent -a -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o checkoutservice
 # restore dependencies
 
 FROM ubuntu
