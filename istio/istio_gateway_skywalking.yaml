@@ -18,7 +18,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: skywalking-httproute
-  namespace: hskywalking
+  namespace: skywalking
 spec:
   hosts:
     - "skywalking.IP_TO_REPLACE.nip.io"
