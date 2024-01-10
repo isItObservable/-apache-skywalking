@@ -81,6 +81,7 @@ helm install "${SKYWALKING_RELEASE_NAME}" oci://registry-1.docker.io/apache/skyw
   --set oap.env.SW_QUERY_ZIPKIN=default \
   --set oap.env.SW_AGENT_ANALYZER=default \
   --set oap.env.SW_METER_ANALYZER_ACTIVE_FILES=network-profiling
+
 helm install node-exporter prometheus-community/prometheus-node-exporter
 helm install kuebstatemetrics prometheus-community/kube-state-metrics
 kubectl apply -f skywalking/event_exporter.yaml -n skywalking
@@ -97,8 +98,7 @@ kubectl label namespace hipster-shop istio-injection=enabled
 kubectl apply -f hipstershop/k8s-manifest.yaml -n hipster-shop
 #Deploy the ingress rules
 kubectl apply -f istio/istio_gateway.yaml
-
-
+kubectl apply -f istio_gateway_skywalking.yaml
 
 kubectl create ns otel-demo
 kubectl label namespace otel-demo istio-injection=enabled
